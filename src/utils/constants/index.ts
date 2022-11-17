@@ -1,0 +1,43 @@
+import endpoints from './endpoints'
+
+const {
+  VITE_APP_NAME: APP_NAME,
+  VITE_GC_KEY: GC_KEY,
+  VITE_FB_KEY: FB_KEY,
+  VITE_FB_AUTHDOMAIN: FB_AUTHDOMAIN,
+  VITE_FB_PROJECTID: FB_PROJECTID,
+  VITE_FB_STORAGEBUCKET: FB_STORAGEBUCKET,
+  VITE_FB_MESSAGINGSENDERID: FB_MESSAGINGSENDERID,
+  VITE_FB_APPID: FB_APPID,
+} = import.meta.env
+
+interface IConfig {
+  APP_NAME: string;
+  GC_KEY: string;
+  FIREBASE: {
+    KEY: string;
+    AUTHDOMAIN: string;
+    PROJECTID: string;
+    STORAGEBUCKET: string;
+    MESSAGINGSENDERID: string;
+    APPID: string;
+  }
+}
+
+const VITE_APP: IConfig = {
+  APP_NAME,
+  GC_KEY,
+  FIREBASE: {
+    KEY: FB_KEY,
+    AUTHDOMAIN: FB_AUTHDOMAIN,
+    PROJECTID: FB_PROJECTID,
+    STORAGEBUCKET: FB_STORAGEBUCKET,
+    MESSAGINGSENDERID: FB_MESSAGINGSENDERID,
+    APPID: FB_APPID,
+  }
+}
+
+export {
+  VITE_APP,
+  endpoints
+}

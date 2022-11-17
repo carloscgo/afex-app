@@ -1,4 +1,4 @@
-# Vue 3 + TypeScript + Vite
+# AFEX App
 
 This template should help get you started developing with Vue 3 and TypeScript in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
 
@@ -14,3 +14,51 @@ Since TypeScript cannot handle type information for `.vue` imports, they are shi
 2. Reload the VS Code window by running `Developer: Reload Window` from the command palette.
 
 You can learn more about Take Over mode [here](https://github.com/johnsoncodehk/volar/discussions/471).
+
+## Installation
+
+```bash
+# Install dependencies from package.json
+yarn install
+```
+
+## Dev server
+
+```bash
+# Launch the dev server
+yarn dev
+```
+
+## Linting and formatting
+
+```bash
+# Lint all files, fixing many violations automatically
+yarn lint
+```
+
+## Building and deploying to production
+
+```bash
+# Build for production with minification
+yarn build
+```
+
+```bash
+# Preview of build 
+yarn preview
+```
+
+## Environment Variables
+
+May be defined on a `.env` file or direct on OS
+
+| Name                         | Description                   | Default           |
+| ---------------------------- | ----------------------------- | ----------------- |
+| `VITE_APP_NAME`              | The application name          | `AFEX App`        |
+| `VITE_GC_KEY`                | Google Cloud API KEY          |                   |
+| `VITE_FB_KEY`                | Firebase API KEY              |                   |
+| `VITE_FB_AUTHDOMAIN`         | Firebase Auth domain          |                   |
+| `VITE_FB_PROJECTID`          | Firebase Project ID           |                   |
+| `VITE_FB_STORAGEBUCKET`      | Firebase Storage Bucket       |                   |
+| `VITE_FB_MESSAGINGSENDERID`  | Firebase Messaging SenderId   |                   |
+| `VITE_FB_APPID`              | Firebase APP ID               |                   |

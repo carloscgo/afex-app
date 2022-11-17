@@ -1,44 +1,36 @@
 <script setup lang="ts">
-import { computed, ref } from "vue";
+import { computed } from "vue";
 import { CCard } from '@coreui/bootstrap-vue';
 import { CCloseButton } from '@coreui/vue/dist/index'
 
 export interface Props {
+  key: string;
   url: string;
   title: string;
   summary: string;
+  thumbnail: string;
 }
 
 const props = defineProps<Props>()
 
-const emit = defineEmits(['onClick']);
+const emit = defineEmits(['onClick', 'onDelete']);
 
-const idVideo = ref()
-
-const setIdVideo = (id: string) => {
-  idVideo.value = id
-}
-
-const miniature = computed(() => {
+const url = computed(() => {
   const id = props.url?.match('[\\?&]v=([^&#]*)')?.[1]
 
   if (!id) return false
 
-  setIdVideo(id)
-
-  return `https://img.youtube.com/vi/${id}/sddefault.jpg`
-});
-
-const url = computed(() => `https://www.youtube.com/embed/${idVideo.value}`);
+  return `https://www.youtube.com/embed/${id}`
+})
 </script>
 
 <template>
-  <div v-if="miniature" class="video-content">
-    <CCard class="card-video" @click="emit('onClick', { ...props, url })">
-      <img :src="miniature" :alt="props.title">
+  <div v-if="thumbnail" class="video-content">
+    <CCard class="card-video">
+      <img :src="thumbnail" :alt="props.title" @click="emit('onClick', { ...props, url })">
 
       <div class="btn-remove">
-        <CCloseButton white />
+        <CCloseButton white @click="emit('onDelete', props.key)" />
       </div>
     </CCard>
   </div>
@@ -53,7 +45,7 @@ const url = computed(() => `https://www.youtube.com/embed/${idVideo.value}`);
     width: 100%;
     height: 100%;
     background-color: var(--bs-gray-900);
-    background-image: v-bind(miniature) !important;
+    background-image: v-bind(thumbnail) !important;
     background-position: center center;
     background-repeat: no-repeat;
     background-size: cover;
