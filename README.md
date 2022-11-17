@@ -62,3 +62,10 @@ May be defined on a `.env` file or direct on OS
 | `VITE_FB_STORAGEBUCKET`      | Firebase Storage Bucket       |                   |
 | `VITE_FB_MESSAGINGSENDERID`  | Firebase Messaging SenderId   |                   |
 | `VITE_FB_APPID`              | Firebase APP ID               |                   |
+
+## Screeshots
+
+![Saved videos](/public/screenshots/snapshot_1.png)
+![Confirm deletion](/public/screenshots/snapshot_2.png)
+![Previously added video](/public/screenshots/snapshot_3.png)
+![Video detail](/public/screenshots/snapshot_4.png)
