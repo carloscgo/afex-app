@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, onMounted, computed } from 'vue'
 
 import { CContainer } from '@coreui/bootstrap-vue'
 
@@ -7,6 +7,7 @@ import Form from './components/Form/Index.vue'
 import Card from './components/Card/Index.vue'
 import Modal from './components/Modal/Index.vue'
 import Loading from './components/Loading/Index.vue'
+import Confirm from './components/Confirm/Index.vue'
 
 import { search, DataService } from './utils/services'
 
@@ -35,6 +36,7 @@ const videoData = ref<Video>({
   open: false
 })
 const loading = ref(false)
+const confirm = ref<string | null>(null)
 const errorMessage = ref('')
 const videos = ref<IVideo[]>([])
 
@@ -54,7 +56,17 @@ const getVideos = async () => {
 
   videos.value = []
 
-  const snapshot = await DataService.getAll()
+  const snapshot = await DataService.getAll() as any
+
+  const error = DataService.getError()
+
+  if (error) {
+    setLoading(false)
+
+    errorMessage.value = error
+
+    return
+  }
 
   snapshot.forEach((doc: any) => {
     const video = doc.data()
@@ -67,7 +79,9 @@ const getVideos = async () => {
   setLoading(false)
 }
 
-getVideos()
+onMounted(async () => {
+  await getVideos()
+})
 
 const removeVideo = async (id: string) => {
   setLoading(true)
@@ -129,17 +143,30 @@ const onClose = () => {
     open: false
   }
 }
+
+const onConfirm = (idVideo: string) => {
+  confirm.value = idVideo
+}
+
+const onDecline = () => {
+  confirm.value = null
+}
+
+const openConfirm = computed(() => Boolean(confirm.value))
 </script>
 
 <template>
   <Loading v-if="loading" />
 
+  <Confirm v-if="openConfirm" message="Esta seguro de quitar el video?" :open="openConfirm" @on-decline="onDecline"
+    @on-accept="removeVideo(confirm as string)" />
+
   <CContainer fluid class="main-content flex-column">
-    <Form msg="Vite + Vue" @on-search="searchVideo" :message="errorMessage" />
+    <Form @on-search="searchVideo" :message="errorMessage" />
 
     <div class="card-videos">
       <Card v-for="(item) in videos" :key="item.key" :url="item.url" :thumbnail="item.thumbnail" :title="item.title"
-        :summary="item.summary" @on-click="setVideo" @on-delete="removeVideo(item.key)" />
+        :summary="item.summary" @on-click="setVideo" @on-delete="onConfirm(item.key)" />
     </div>
 
     <Modal v-if="videoData.url" :video="videoData" @on-close="onClose" />
