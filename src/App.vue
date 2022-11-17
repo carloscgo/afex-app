@@ -41,15 +41,14 @@ const onClose = () => {
 </script>
 
 <template>
-  {{ videoData }}
   <CContainer fluid class="main-content flex-column">
-    <Form msg="Vite + Vue" @onSearch="(e: any) => global.console.log(e)" />
+    <Form msg="Vite + Vue" @on-search="(e: any) => global.console.log(e)" />
 
     <div class="card-videos">
-      <Card url="https://www.youtube.com/watch?v=hHz8EXyVmMo" title="algo" summary="other" @onClick="setVideo" />
+      <Card url="https://www.youtube.com/watch?v=hHz8EXyVmMo" title="algo" summary="other" @on-click="setVideo" />
     </div>
 
-    <Modal v-if="videoData.url" :video="videoData" @onClose="onClose" />
+    <Modal v-if="videoData.url" :video="videoData" @on-close="onClose" />
   </CContainer>
 </template>
 

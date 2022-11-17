@@ -1,0 +1,41 @@
+{
+  "extends": [
+    "eslint:recommended",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:import/errors",
+    "plugin:vue/vue3-recommended",
+    "prettier"
+  ],
+  "rules": {
+    "no-console": 1,
+    "vue/multi-word-component-names": 0,
+    "vue/first-attribute-linebreak": 0
+  },
+  "plugins": [
+    "@typescript-eslint",
+    "import",
+    "vue"
+  ],
+  "parserOptions": {
+    "ecmaVersion": 2018,
+    "parser": "@typescript-eslint/parser"
+  },
+  "env": {
+    "es6": true,
+    "browser": true,
+    "node": true,
+    "commonjs": true
+  },
+  "settings": {
+    "vue": {
+      "version": "detect"
+    },
+    "import/resolver": {
+      "node": {
+        "extensions": [".vue", ".ts", ".js"],
+        "moduleDirectory": ["src", "node_modules"]
+      }
+    }
+
+  }
+}

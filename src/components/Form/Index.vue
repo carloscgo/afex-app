@@ -2,8 +2,6 @@
 import { ref } from 'vue'
 import { CButton, CInputGroup } from '@coreui/bootstrap-vue';
 
-defineProps()
-
 const emit = defineEmits(['onSearch']);
 
 const input = ref('')
@@ -14,7 +12,7 @@ const input = ref('')
     <h1 class="title">Añadir nuevo video</h1>
 
     <CInputGroup class="mb-3">
-      <CFormInput type="text" size="lg" placeholder="Añadir" v-model="input" aria-label="input-add"
+      <CFormInput v-model="input" type="text" size="lg" placeholder="Añadir" aria-label="input-add"
         aria-describedby="input-addon" />
 
       <CButton color="primary" type="submit">Añadir</CButton>
